@@ -1,5 +1,7 @@
 {
   "title": "Q&A",
   "defaultOpen": false,
-  "pages": [ "where-is-my-data" ]
+  "pages": [
+    "where-is-my-data"
+  ]
 }
