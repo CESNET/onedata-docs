@@ -2,8 +2,8 @@
   "title": "e-INFRA CZ Onedata documentation",
   "pages": [
     "index",
-    "about-onedata",
     "how-to",
-    "q-n-a"
+    "q-n-a",
+    "troubleshooting"
   ]
 }
