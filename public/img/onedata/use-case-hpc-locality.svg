@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" width="860" height="420">
+  <defs>
+    <style>
+      .label { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; fill: #1e293b; text-anchor: middle; }
+      .sublabel { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #64748b; text-anchor: middle; }
+      .caption { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #475569; text-anchor: middle; font-style: italic; }
+      .icon { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .arrow { stroke: #2563eb; stroke-width: 2; fill: none; marker-end: url(#arrowhead); marker-start: url(#arrowheadreverse)}
+    </style>
+
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowheadreverse" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto-start-reverse">
+      <polygon points="10 3.5, 0 7, 0 0" fill="#2563eb"/>
+    </marker>    
+  </defs>
+
+  <!-- Local provider box -->
+  <rect x="80" y="240" width="220" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <!-- Central provider box -->
+  <rect x="320" y="30" width="220" height="100" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <!-- HPC provider box -->
+  <rect x="560" y="240" width="220" height="100" rx="10" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+
+  <!-- Local provider content -->
+  <svg x="102" y="270" width="36" height="36" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="5" rx="9" ry="3" class="icon" stroke="#2563eb"/>
+    <path d="M3 5v6c0 3 4 5 9 5s9-2 9-5V5" class="icon" stroke="#2563eb"/>
+    <path d="M3 11v6c0 3 4 5 9 5s9-2 9-5v-6" class="icon" stroke="#2563eb"/>
+  </svg>
+  <text x="190" y="280" class="label">Local provider</text>
+  <text x="190" y="297" class="sublabel">Primary dataset</text>
+  <text x="190" y="313" class="sublabel">(your institution)</text>
+
+  <!-- Central provider content -->
+  <svg x="342" y="60" width="36" height="36" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="5" rx="9" ry="3" class="icon" stroke="#2563eb"/>
+    <path d="M3 5v6c0 3 4 5 9 5s9-2 9-5V5" class="icon" stroke="#2563eb"/>
+    <path d="M3 11v6c0 3 4 5 9 5s9-2 9-5v-6" class="icon" stroke="#2563eb"/>
+  </svg>
+  <text x="430" y="70" class="label">Central provider</text>
+  <text x="430" y="87" class="label">(optional)</text>
+  <text x="430" y="103" class="sublabel">e-INFRA CZ layer</text>
+
+  <!-- HPC provider content -->
+  <svg x="582" y="270" width="36" height="36" viewBox="0 0 24 24">
+    <rect x="2" y="3" width="7" height="7" rx="1" class="icon" stroke="#059669"/>
+    <rect x="15" y="3" width="7" height="7" rx="1" class="icon" stroke="#059669"/>
+    <rect x="2" y="14" width="7" height="7" rx="1" class="icon" stroke="#059669"/>
+    <rect x="15" y="14" width="7" height="7" rx="1" class="icon" stroke="#059669"/>
+  </svg>
+  <text x="670" y="280" class="label">HPC provider</text>
+  <text x="670" y="297" class="sublabel">Fast staging</text>
+  <text x="670" y="313" class="sublabel">near compute</text>
+
+  <!-- Arrows: Central <-> Local (bidirectional) -->
+  <path d="M 400 140 L 200 230" class="arrow"/>
+  
+  <!-- Arrows: Central <-> HPC (bidirectional) -->
+  <path d="M 460 140 L 650 230" class="arrow"/>
+  
+  <!-- Arrows: Local <-> HPC (bidirectional) -->
+  <path d="M 310 290 L 550 290" class="arrow"/>
+  
+  <!-- Bottom caption -->
+  <text x="430" y="390" class="caption">One unified namespace — data moves transparently between providers</text>
+</svg>

@@ -1,44 +1,102 @@
 ---
-title: "How do I use OneClient?"
+title: "Mount Onedata Spaces with Oneclient"
 ---
 
-For seamles integation with your workstation, Oneclient for Linux can be used to mount your Onedata Spaces as any other folder (mountpoint) in your sytsem.
-The installation nad setup is done by user in terminal.
+This guide shows you how to install and use Oneclient to mount your Onedata Spaces as a local directory on a Linux workstation or HPC cluster. After completing these steps, your Space will appear as a normal folder in your file system.
 
-To be able to try and mount Onedata namespace, you'll need hostname of Onedata provider and access token.
+## Prerequisites
 
-Oneprovider __host address__ can be found in Web UI:
+Before you begin, make sure you have the following:
 
-    ![Provider hostname](/img/onedata/how-to-use-client-1.png)
+- A Linux-based system (workstation or HPC login node).
+- Your Oneprovider **hostname**. You can find it in the Onedata Web UI under your provider details.
 
-__Access token__ can be viewed and created also in Web UI:
+  ![Provider hostname](/img/onedata/how-to-use-client-1.png)
 
-    ![Access token creation](/img/onedata/how-to-use-client-2.png)
+- A valid **access token**. You can view and create tokens in the Onedata Web UI.
 
-To __install__ Oneclient using packages, simply use the following command:
+  ![Access token creation](/img/onedata/how-to-use-client-2.png)
 
-```
+- A target **mount point** directory on your local file system (e.g., `/home/user/oneclient`).
+
+> **Note:** Oneclient requires FUSE. Most Linux distributions include it by default. If you encounter permission issues, see the [Troubleshooting](#troubleshooting) section.
+
+---
+
+## Procedure
+
+### 1. Install Oneclient
+
+Run the official installation script in your terminal:
+
+```bash
 $ curl -sS http://get.onedata.org/oneclient.sh | bash
 ```
-*Oneclient is currently not officaly supported for Ubuntu 24 (Noble Numbat) and installation script Linux version check will not allow you to start with installation. Although, this check can be avoided if you alter the script.*
 
-To mount into file system:
+> **Warning:** Oneclient is **not officially supported** on Ubuntu 24 (Noble Numbat). The installation script performs a Linux version check that will block the installation. You can bypass this check by editing the script, but proceed at your own risk.
 
-```
+### 2. Mount your Space
+
+Choose one of the following methods.
+
+#### Option A — Command-line flags
+
+Provide the provider hostname, access token, and mount point directly:
+
+```bash
 $ oneclient -H <PROVIDER_HOSTNAME> -t <ACCESS_TOKEN> <MOUNT_POINT>
 ```
-or
-```
+
+Replace the placeholders:
+- `<PROVIDER_HOSTNAME>` — your Oneprovider host (e.g., `cloud2.onedata.e-infra.cz`)
+- `<ACCESS_TOKEN>` — your access token string
+- `<MOUNT_POINT>` — the local directory where you want the Space to appear
+
+#### Option B — Environment variables
+
+Set the credentials as environment variables, then mount:
+
+```bash
 $ export ONECLIENT_ACCESS_TOKEN=<CLIENT_TOKEN>         # e.g. MDAxNWxvY2F00aW9uIG9uZXp...
 $ export ONECLIENT_PROVIDER_HOST=<PROVIDER_HOSTNAME>   # e.g. cloud2.onedata.e-infra.cz, cloud255-73.cerit-sc.cz
 $ oneclient <MOUNT_POINT>                              # e.g. /home/honza/oneclient
 ```
 
-To terminate the Oneclient application and unmount your spaces, type:
+> **Tip:** Using environment variables is useful when you want to avoid typing long tokens repeatedly or when running batch jobs on an HPC cluster.
+
+### 3. Verify the mount
+
+After a successful mount, your Onedata Space will behave like any other local folder. You can verify it by listing the contents:
+
+```bash
+$ ls <MOUNT_POINT>
 ```
+
+If you see your Space contents, the mount is active and ready to use.
+
+### 4. Unmount
+
+When you are finished, terminate Oneclient and unmount the directory:
+
+```bash
 $ fusermount -uz <MOUNT_POINT>
 ```
-These are some know hickups that can occure and stop you from mounting or accessing the mountpoint:
- - [Mountpoint was successfully mounted, but you do not have permissions to access it](/docs/troubleshooting/oneclient-permissions-denied)
 
-*TO DO*
+> **Note:** If the mount point still appears busy, close any terminals or applications currently using files inside it, then retry the unmount command.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely cause | Solution |
+|---|---|---|
+| `Permission denied` after mounting, `d?????????` on the mount point | FUSE user permissions not allowed | [Fix FUSE permissions](/docs/troubleshooting/oneclient-permissions-denied) |
+| Installation script fails on Ubuntu 24 | Unsupported OS version check | Edit the script to bypass the version check, or use an older Ubuntu version |
+| Mount command hangs or times out | Invalid provider hostname or network issue | Verify the hostname in the Web UI and check your network connectivity |
+
+---
+
+## See also
+
+- [Use Onedata via the Web Portal](/docs/how-to/how-to-use-portal) — an alternative when you do not need a local mount.
+- [Troubleshooting: Oneclient permissions denied](/docs/troubleshooting/oneclient-permissions-denied)

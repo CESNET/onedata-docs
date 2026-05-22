@@ -2,6 +2,7 @@
   "title": "e-INFRA CZ Onedata documentation",
   "pages": [
     "index",
+    "use-cases",
     "how-to",
     "q-n-a",
     "troubleshooting"

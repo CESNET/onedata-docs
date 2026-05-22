@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <defs>
+    <style>
+      .box { fill: #ffffff; stroke: #2563eb; stroke-width: 2; rx: 8; }
+      .box-org { fill: #ffffff; stroke: #7c3aed; stroke-width: 2; rx: 8; }
+      .label { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; fill: #1e293b; text-anchor: middle; }
+      .sublabel { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #64748b; text-anchor: middle; }
+      .title { font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 700; fill: #0f172a; text-anchor: middle; }
+      .arrow { stroke: #2563eb; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .bg { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1; rx: 12; }
+      .icon { fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .icon-org { fill: none; stroke: #7c3aed; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .center-bg { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 50%; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- Background panel -->
+  <rect x="20" y="20" width="760" height="380" class="bg"/>
+
+  <!-- Title -->
+  <text x="400" y="50" class="title">Shared Space Across Institutions</text>
+
+  <!-- Institution A -->
+  <rect x="60" y="100" width="180" height="100" class="box-org"/>
+  <svg x="80" y="120" width="32" height="32" viewBox="0 0 24 24">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" class="icon-org"/>
+    <circle cx="9" cy="7" r="4" class="icon-org"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" class="icon-org"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" class="icon-org"/>
+  </svg>
+  <text x="170" y="145" class="label">University A</text>
+  <text x="170" y="162" class="sublabel">Researchers</text>
+  <text x="170" y="177" class="sublabel">&amp; students</text>
+
+  <!-- Institution B -->
+  <rect x="60" y="240" width="180" height="100" class="box-org"/>
+  <svg x="80" y="260" width="32" height="32" viewBox="0 0 24 24">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" class="icon-org"/>
+    <circle cx="9" cy="7" r="4" class="icon-org"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" class="icon-org"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" class="icon-org"/>
+  </svg>
+  <text x="170" y="285" class="label">Research Lab B</text>
+  <text x="170" y="302" class="sublabel">Collaborators</text>
+  <text x="170" y="317" class="sublabel">&amp; analysts</text>
+
+  <!-- Institution C -->
+  <rect x="560" y="170" width="180" height="100" class="box-org"/>
+  <svg x="580" y="190" width="32" height="32" viewBox="0 0 24 24">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" class="icon-org"/>
+    <circle cx="9" cy="7" r="4" class="icon-org"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" class="icon-org"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" class="icon-org"/>
+  </svg>
+  <text x="670" y="215" class="label">Institution C</text>
+  <text x="670" y="232" class="sublabel">Project partners</text>
+  <text x="670" y="247" class="sublabel">&amp; reviewers</text>
+
+  <!-- Central shared space -->
+  <circle cx="400" cy="220" r="70" class="center-bg"/>
+  <svg x="376" y="165" width="48" height="48" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="5" rx="9" ry="3" class="icon"/>
+    <path d="M3 5v6c0 3 4 5 9 5s9-2 9-5V5" class="icon"/>
+    <path d="M3 11v6c0 3 4 5 9 5s9-2 9-5v-6" class="icon"/>
+  </svg>
+  <text x="400" y="235" class="label">Shared Space</text>
+  <text x="400" y="250" class="sublabel">One master copy</text>
+  <text x="400" y="263" class="sublabel">Unified permissions</text>
+
+  <!-- Arrows -->
+  <line x1="240" y1="150" x2="330" y2="190" class="arrow"/>
+  <line x1="240" y1="290" x2="330" y2="250" class="arrow"/>
+  <line x1="470" y1="220" x2="560" y2="220" class="arrow"/>
+</svg>
