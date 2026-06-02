@@ -1,100 +1,88 @@
 ---
-title: "How do I use Onedata portal?"
+title: "Manage Files via the Onedata Web Portal"
 ---
 
-All features are described in official [onedata documentation](https://onedata.org/#/home/documentation/25/user-guide/interfaces/web-file-browser.html).  
-Following below are only essentials and organization specifics cases.
+This guide shows you how to use the Onedata Web Portal to upload, browse, share, and manage files directly in your browser. For a complete feature reference, see the [official Onedata documentation](https://onedata.org/#/home/documentation/25/user-guide/interfaces/web-file-browser.html).
 
-* Log into [Onedata portal](https://onedata.e-infra.cz) via one of the identity provider.
+## Prerequisites
 
-## Overview
+- An active e-INFRA CZ account with access to at least one Onedata Space.
+- A modern web browser with pop-ups enabled.
+- The Onedata portal URL: [https://onedata.e-infra.cz](https://onedata.e-infra.cz)
 
-The Web File Browser in Onedata provides a simple way to **manage files in your spaces directly from a browser**.  
-It works like a typical file manager with folders and files.
-
-- Data is organized in **spaces (virtual directories)**  
-- You can **upload, download, browse, and manage files**  
-- Interface is accessible without installing additional tools  
+> **Tip:** Pop-ups must be allowed for file downloads and some upload workflows to function correctly.
 
 ---
 
-## Basic Navigation
+## Procedure
 
-### Browse files
-- Open a **space**
-- Navigate using folders (like a standard file system)
-- Click folders to enter them
+### 1. Log in
 
-### Open files
-- **Double-click** a file to open or download it  
+Open [https://onedata.e-infra.cz](https://onedata.e-infra.cz) and log in via one of the available identity providers.
 
----
+### 2. Browse your Spaces
 
-## File Operations
+After logging in, you will see your Spaces listed.
 
-### Upload files
-- Open target directory
-- **Drag & drop files into the browser window**  
+- Click a **Space** to open it.
+- Navigate folders like a standard file manager.
+- Click folders to enter them.
 
-### Download files
-- Double-click file  
-- Or use download option from context menu
+### 3. Work with files
 
-### Create folders
-- Use **“New folder”** option in UI
+#### Upload files
 
-### Delete / Rename
-- Use file **context menu (right-click or actions menu)**
+1. Open the target directory inside your Space.
+2. **Drag and drop** files into the browser window, or use the upload button.
 
----
+#### Download files
 
-## File Management Features
+- **Double-click** a file to open or download it.
+- Alternatively, use the download option in the file context menu.
 
-### Organizing data
-- Files are structured in:
-  - Spaces
-  - Directories
-  - Files
+#### Create folders
 
-### Metadata
-- You can attach metadata to:
-  - Spaces
-  - Folders
-  - Files  
+- Use the **New folder** button in the toolbar.
 
----
+#### Rename or delete
 
-## Sharing & Access
+- Right-click a file or folder and select **Rename** or **Delete** from the context menu.
 
-### Access control
-- Permissions are managed per space or file
-- Controlled via users and groups
+### 4. Attach metadata
 
-### Public sharing
-- Files or data can be shared with others
-- Access depends on assigned permissions
+You can add metadata to help organize and describe your data:
 
----
+- To a **Space** — select the Space and open the metadata panel.
+- To a **Folder** — right-click the folder and choose the metadata option.
+- To a **File** — right-click the file and choose the metadata option.
 
-## Tips & Notes
+### 5. Manage sharing and access
 
-- Allow **pop-ups in browser** for proper file handling  
-- For large-scale or advanced work, consider:
-  - CLI tool (**Oneclient**)
-  - APIs (REST, S3, CDMI)  
+#### Control who can access your data
+
+- Permissions are managed per Space or per file.
+- Add users or groups and assign read/write access as needed.
+
+#### Share files publicly
+
+- Select the file or folder you want to share.
+- Configure public access through the sharing settings.
+- Remember: access level depends on the permissions you assign.
 
 ---
 
-## When to Use Web File Browser
+## When to use the Web Portal
 
-Use it when you want to:
-- Quickly upload/download files
-- Browse data without setup
-- Perform basic file operations
+| Use the Web Portal when... | Consider an alternative when... |
+|---|---|
+| You need to quickly upload or download a few files | You need to transfer large datasets (use [Oneclient](/docs/how-to/how-to-use-client)) |
+| You want to browse data without installing anything | You need automation or scripting (use APIs) |
+| You are performing basic file operations | You need programmatic access (use REST or S3 API) |
 
-Use other interfaces when you need:
-- Automation
-- Large data transfers
-- Programmatic access
+> **Tip:** For day-to-day file management and collaboration, the Web Portal is the fastest way to get started. For HPC workflows or large-scale data movement, switch to [Oneclient](/docs/how-to/how-to-use-client) or the API interfaces.
 
 ---
+
+## See also
+
+- [Mount Onedata Spaces with Oneclient](/docs/how-to/how-to-use-client) — for command-line and HPC workflows.

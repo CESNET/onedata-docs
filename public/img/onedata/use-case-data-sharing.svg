@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360">
+  <defs>
+    <style>
+      .icon { fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .icon-org { fill: none; stroke: #7c3aed; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .icon-ext { fill: none; stroke: #059669; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .label { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; fill: #1e293b; text-anchor: middle; }
+      .sublabel { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #64748b; text-anchor: middle; }
+      .head { font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 700; fill: #0f172a; text-anchor: middle; }
+      .bg { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 1; rx: 12; }
+      .center-bg { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 50%; }
+      .arrow { stroke: #2563eb; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- Background panel -->
+  <rect x="20" y="20" width="760" height="320" class="bg"/>
+
+  <!-- Title -->
+  <text x="400" y="50" class="head">Easy Data Sharing</text>
+
+  <!-- Central shared space -->
+  <circle cx="400" cy="190" r="70" class="center-bg"/>
+  <svg x="376" y="150" width="48" height="48" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="5" rx="9" ry="3" class="icon"/>
+    <path d="M3 5v6c0 3 4 5 9 5s9-2 9-5V5" class="icon"/>
+    <path d="M3 11v6c0 3 4 5 9 5s9-2 9-5v-6" class="icon"/>
+  </svg>
+  <text x="400" y="220" class="label">Shared Space</text>
+  <text x="400" y="235" class="sublabel">One master copy</text>
+
+  <!-- Team / Group -->
+  <rect x="60" y="100" width="180" height="90" class="bg" style="stroke:#7c3aed; stroke-width:1.5; fill:#faf5ff;"/>
+  <svg x="80" y="115" width="32" height="32" viewBox="0 0 24 24">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" class="icon-org"/>
+    <circle cx="9" cy="7" r="4" class="icon-org"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" class="icon-org"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" class="icon-org"/>
+  </svg>
+  <text x="170" y="140" class="label">Team / Group</text>
+  <text x="170" y="157" class="sublabel">Built-in roles</text>
+  <text x="170" y="172" class="sublabel">&amp; permissions</text>
+
+  <!-- Individual -->
+  <rect x="60" y="220" width="180" height="90" class="bg" style="stroke:#2563eb; stroke-width:1.5; fill:#f0f7ff;"/>
+  <svg x="80" y="235" width="32" height="32" viewBox="0 0 24 24">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" class="icon"/>
+    <circle cx="12" cy="7" r="4" class="icon"/>
+  </svg>
+  <text x="170" y="260" class="label">Individual</text>
+  <text x="170" y="277" class="sublabel">Invite by email</text>
+  <text x="170" y="292" class="sublabel">or identity</text>
+
+  <!-- External / Ad-hoc -->
+  <rect x="560" y="160" width="180" height="90" class="bg" style="stroke:#059669; stroke-width:1.5; fill:#f0fdf4;"/>
+  <svg x="580" y="175" width="32" height="32" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" class="icon-ext"/>
+    <path d="M2 12h20" class="icon-ext"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" class="icon-ext"/>
+  </svg>
+  <text x="670" y="200" class="label">External partner</text>
+  <text x="670" y="217" class="sublabel">Web link —</text>
+  <text x="670" y="232" class="sublabel">no login needed</text>
+
+  <!-- Arrows -->
+  <line x1="240" y1="145" x2="330" y2="170" class="arrow"/>
+  <line x1="240" y1="265" x2="330" y2="210" class="arrow"/>
+  <line x1="470" y1="205" x2="560" y2="205" class="arrow"/>
+</svg>

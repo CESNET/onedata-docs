@@ -6,13 +6,13 @@ title: "Overview"
 
 ## About e-INFRA CZ Onedata
 
-### 1. What is Onedata?
+### What is Onedata?
 
 **Onedata** is a global data management platform that lets you store, share, and access research data across distributed storage systems — regardless of where the physical storage is located. It presents data from multiple storage providers as a single, unified file system, making it easy to work with large datasets across institutions and borders.
 
 > **In simple terms:** Think of Onedata as a smart cloud storage system designed specifically for research — one that connects storage from multiple locations and lets you access it all from one place.
 
-### 2. When to Use Onedata & Its Advantages
+### When to Use Onedata & Its Advantages
 
 #### When is Onedata a Good Fit?
 
@@ -36,6 +36,32 @@ Onedata is well-suited for:
 | **Security & access control** | Fine-grained permissions for files and folders |
 | **Integration with HPC** | Can be used directly with computing resources |
 
-Official documentation at [Onedata docs].
+#### Not sure whether to use Onedata or S3? Here is a quick comparison.
+
+Differences between the two:
+|  | Onedata | S3 Storage |
+|---|---|---|
+| **Purpose** | Data management platform across a storage federation | Raw data storage |
+| **Storage type** | Multiple backends with a unifying layer over them | Object storage |
+| **Access methods** | POSIX FS, S3 API, REST API, CDMI API | S3 API only |
+| **Data location** | Same data can live in multiple locations | Single data storage cluster |
+| **Other features** | Permissions, groups, roles, replication, inter-site transfer | Tenant/bucket/object model, reliability |
+
+When to use:
+|Onedata |
+|---|
+|Unified interface across multiple storages.|
+|Multiple access methods.|
+|Integration of already existing storage.|
+|Distributed / shared datasets, operations on data from different locations.|
+
+|S3 Storage|
+|---|
+|Backup, archiving.|
+|Fast access, big data.|
+|No need for automatic migration, replication, sharing.|
+|S3 API access is sufficient.|
+---
+*Official documentation at [Onedata docs].*
 
 [Onedata docs]: https://onedata.org/#/home/documentation
