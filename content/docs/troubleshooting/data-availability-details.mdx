@@ -1,0 +1,60 @@
+---
+title: "Data availability details"
+---
+
+### Context
+
+The main two components of the Onedata system, Onezone and a set of Oneproviders, get backed-up regularly. The backup archives
+operational metadata of the components, not the user data.
+
+In case of a failure, we can restore the last backed-up metadata. Since the metadata also contain description of user data, the restore
+might cause inconsistencies between the restored metadata and the actual user data stored in storage backends associated with user Space.
+
+The following section describes types of inconsistencies that might occur.
+
+### Possible data inconsistency types after emergency restore from a backup
+
+Each scenario describes a file operation that happened since a backup has been created and the status after the Oneprovider has been restored from the backup.
+The operation causes the actual data on a storage backend to diverge from the status recorded in the Oneprovider's metadata in the backup.
+
+The behavior depends on a number of providers which support a Space and storage backend type. For simplicity, we describe here only the two
+most common storage backend types, S3 and POSIX.
+
+#### Single provider setup
+
+##### S3 storage
+
+File added:
+- The Space does not show the added file.
+- The file is present in the storage, no longer reachable via Onedata.
+
+File deleted:
+- The file re-appears in the Space.
+- Storage does not contain it. If the file is accessed via Onedata (download, mount, ...), Onedata returns a zero-filled placeholder file of the same name.
+  This placeholder file is not saved in the storage.
+
+File renamed:
+- In the Space, a zero-filled placeholder file appears under the old name.
+- In the storage, the placeholder file is not present. Instead, it contains the original file with the new name, which is no longer reachable via Onedata.
+
+File edited:
+- The Space returns the file with the old content (from cache).
+- The storage contains the file with the new content. If the file is edited again via Onedata, the storage is updated with the newest content and becomes in-sync with the Space.
+
+##### POSIX storage
+
+The behavior is almost identical to the S3 storage, with a few differences.
+
+File deleted / renamed:
+- When the re-appeared file is accessed via Onedata, the zero-filled placeholder file is also stored in the POSIX storage.
+
+#### Multiple providers setup
+
+##### S3 storage
+
+Data distribution might differ from both the state before restore and the state recorded in the backup data.
+Transfer operations (moving data between providers) remain functional, and the intended data distribution can be achieved manually unless data has been lost.
+
+##### POSIX storage
+
+Any transfer operation freezes. At the moment, there is no reliable way to restore the full functionality of the Space apart from re-creating it from scratch.

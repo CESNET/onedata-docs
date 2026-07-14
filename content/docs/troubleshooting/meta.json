@@ -1,5 +1,8 @@
 {
   "title": "Troubleshooting",
   "defaultOpen": false,
-  "pages": [ "oneclient-permissions-denied" ]
+  "pages": [
+    "oneclient-permissions-denied",
+    "data-availability-details"
+  ]
 }
