@@ -65,3 +65,14 @@ When to use:
 *Official documentation at [Onedata docs].*
 
 [Onedata docs]: https://onedata.org/#/home/documentation
+
+
+### Service guarantees
+
+Onedata is a data management platform, not a storage. Therefore the system has limited guarantees when it comes to data loss and consistency.
+
+The overall policy is based on [Terms and Conditions of CESNET Data Storage Services](https://docs.du.cesnet.cz/en/docs/introduction/terms-of-usage).
+
+e-INFRA CZ Onedata puts priority on keeping the service operational. We do regular backups of runtime data of all components and are able to restore the system
+to the last functional state in case of emergency. The frequency of the backup aims to minimize potential problems with restoring.
+However, some inconsistencies in user data might still occur. See also the [Data availability details section](/docs/troubleshooting/data-availability-details).
