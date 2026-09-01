@@ -21,8 +21,6 @@ Before you begin, make sure you have the following:
 
 > **Note:** Oneclient requires FUSE. Most Linux distributions include it by default. If you encounter permission issues, see the [Troubleshooting](#troubleshooting) section.
 
----
-
 ## Procedure
 
 ### 1. Install Oneclient
@@ -84,8 +82,6 @@ $ fusermount -uz <MOUNT_POINT>
 
 > **Note:** If the mount point still appears busy, close any terminals or applications currently using files inside it, then retry the unmount command.
 
----
-
 ## Troubleshooting
 
 | Symptom | Likely cause | Solution |
@@ -93,8 +89,6 @@ $ fusermount -uz <MOUNT_POINT>
 | `Permission denied` after mounting, `d?????????` on the mount point | FUSE user permissions not allowed | [Fix FUSE permissions](/docs/troubleshooting/oneclient-permissions-denied) |
 | Installation script fails on Ubuntu 24 | Unsupported OS version check | Edit the script to bypass the version check, or use an older Ubuntu version |
 | Mount command hangs or times out | Invalid provider hostname or network issue | Verify the hostname in the Web UI and check your network connectivity |
-
----
 
 ## See also
 
