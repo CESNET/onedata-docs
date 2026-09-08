@@ -62,7 +62,7 @@
     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" class="icon-ext"/>
   </svg>
   <text x="670" y="200" class="label">External partner</text>
-  <text x="670" y="217" class="sublabel">Web link —</text>
+  <text x="670" y="217" class="sublabel">Web link -</text>
   <text x="670" y="232" class="sublabel">no login needed</text>
 
   <!-- Arrows -->

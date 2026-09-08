@@ -64,5 +64,5 @@
   <path d="M 310 290 L 550 290" class="arrow"/>
   
   <!-- Bottom caption -->
-  <text x="430" y="390" class="caption">One unified namespace — data moves transparently between providers</text>
+  <text x="430" y="390" class="caption">One unified namespace - data moves transparently between providers</text>
 </svg>
