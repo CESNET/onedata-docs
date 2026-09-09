@@ -2,25 +2,23 @@
 title: "Use Cases"
 ---
 
-## Use Case 1 — Simple Cloud Storage
+## Use Case 1 - Simple Cloud Storage
 
 Onedata can be used as a straightforward alternative to traditional cloud storage services.
 
 - **No buckets or API keys needed.** You work with files and folders just like on your local computer.
 - **Multiple access options.** Use the web portal for quick uploads, or mount your Space as a local directory with Oneclient.
-- **Multiple backend support.** Onedata can manage data stored on POSIX file systems, NFS, S3, Ceph RADOS, HTTP/HTTPS, and XRootD — all through a single unified interface.
+- **Multiple backend support.** Onedata can manage data stored on POSIX file systems, NFS, S3, Ceph RADOS, HTTP/HTTPS, and XRootD - all through a single unified interface.
 - **Easier for non-technical users.** If you just need to store, share, and manage files without learning S3 concepts, Onedata provides a familiar experience.
 
 > **When to choose this:** Small teams, personal backups, or any workflow where a conventional file system feel is preferred over object storage semantics.
 
----
-
-## Use Case 2 — HPC Data Locality Optimization
+## Use Case 2 - HPC Data Locality Optimization
 
 One of Onedata's biggest strengths is the ability to move data close to where compute happens, reducing latency and avoiding bandwidth bottlenecks.
 
 1. **Store primary data** in your home Onedata provider (e.g., at your home institution).
-2. **Replicate or transfer** the dataset to a provider physically close to the HPC cluster you want to use — often on faster storage tiers.
+2. **Replicate or transfer** the dataset to a provider physically close to the HPC cluster you want to use - often on faster storage tiers.
 3. **Run your compute job** with high-throughput, low-latency access to the data.
 4. **Move results back** to your home provider for long-term storage or further analysis.
 
@@ -28,9 +26,7 @@ One of Onedata's biggest strengths is the ability to move data close to where co
 
 ![HPC data locality flow](/img/onedata/use-case-hpc-locality.svg)
 
----
-
-## Use Case 3 — Cross-Institution Collaboration
+## Use Case 3 - Cross-Institution Collaboration
 
 Large-scale research projects often span multiple universities or labs across regions. Onedata supports these consortia by providing a single, long-term shared Space as the project backbone.
 
@@ -42,9 +38,7 @@ Large-scale research projects often span multiple universities or labs across re
 
 ![Cross-institution collaboration](/img/onedata/use-case-collaboration.svg)
 
----
-
-## Use Case 4 — Easy Data Sharing
+## Use Case 4 - Easy Data Sharing
 
 Onedata makes it simple to share data with colleagues, collaborators, or external partners without creating duplicates or managing complex infrastructure.
 
@@ -63,7 +57,7 @@ Onedata makes it simple to share data with colleagues, collaborators, or externa
 ### Cross-community and ad-hoc sharing
 
 - Share datasets instantly with external partners via a web link.
-- Recipients access files through the browser — no account or installation required.
+- Recipients access files through the browser - no account or installation required.
 - Ideal for peer review, conferences, or one-off data exchanges.
 
 > **When to choose this:** Whenever you need to grant someone access to your data quickly, whether they are a teammate, a reviewer, or an external collaborator.

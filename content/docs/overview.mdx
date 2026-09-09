@@ -8,9 +8,22 @@ title: "Overview"
 
 ### What is Onedata?
 
-**Onedata** is a global data management platform that lets you store, share, and access research data across distributed storage systems — regardless of where the physical storage is located. It presents data from multiple storage providers as a single, unified file system, making it easy to work with large datasets across institutions and borders.
+**Onedata** is a global data management platform that lets you store, share, and access research data
+across distributed storage systems - regardless of where the physical storage is located.
+It presents data from multiple storage providers as a single, unified file system, making it easy
+to work with large datasets across institutions and borders.
 
-> **In simple terms:** Think of Onedata as a smart cloud storage system designed specifically for research — one that connects storage from multiple locations and lets you access it all from one place.
+> **In simple terms:** Think of Onedata as a smart cloud storage system designed specifically
+for research - one that connects storage from multiple locations and lets you access it all from one place.
+
+### What is e-INFRA CZ Onedata
+
+**e-INFRA CZ Onedata** is a e-INFRA CZ service based on the Onedata system.
+
+It provides users with one central access point available at https://onedata.e-infra.cz.
+
+The service operates several storage providers with various storage backends. It aims to bring
+e-INFRA CZ users a flexibe data storage alternative.
 
 ### When to Use Onedata & Its Advantages
 
@@ -21,7 +34,7 @@ Onedata is well-suited for:
 - **Storing and sharing large research datasets** that exceed the capacity of typical cloud storage (e.g., Google Drive, Dropbox)
 - **Collaborating with colleagues** across different institutions or countries
 - **Archiving research outputs** that need to be accessible long-term
-- **Processing data on HPC (High-Performance Computing) clusters** — Onedata can be mounted directly as a file system
+- **Processing data on HPC (High-Performance Computing) clusters** - Onedata can be mounted directly as a file system
 - **Publishing datasets** so others can access or cite your research data
 
 #### Key Advantages
@@ -61,15 +74,16 @@ When to use:
 |Fast access, big data.|
 |No need for automatic migration, replication, sharing.|
 |S3 API access is sufficient.|
----
+
 *Official documentation at [Onedata docs].*
 
-[Onedata docs]: https://onedata.org/#/home/documentation
+[Onedata docs]: https://onedata.org/docs
 
 
 ### Service guarantees
 
-Onedata is a data management platform, not a storage. Therefore the system has limited guarantees when it comes to data loss and consistency.
+Onedata is a data management platform that relies on external services for actual data storage.
+Therefore, the system has limited guarantees when it comes to data loss and consistency.
 
 The overall policy is based on [Terms and Conditions of CESNET Data Storage Services](https://docs.du.cesnet.cz/en/docs/introduction/terms-of-usage).
 

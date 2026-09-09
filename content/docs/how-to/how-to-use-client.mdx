@@ -2,7 +2,8 @@
 title: "Mount Onedata Spaces with Oneclient"
 ---
 
-This guide shows you how to install and use Oneclient to mount your Onedata Spaces as a local directory on a Linux workstation or HPC cluster. After completing these steps, your Space will appear as a normal folder in your file system.
+This guide shows you how to install and use Oneclient to mount your Onedata Spaces as a local directory on a Linux workstation or HPC cluster.
+After completing these steps, your Space will appear as a normal folder in your file system.
 
 ## Prerequisites
 
@@ -19,9 +20,9 @@ Before you begin, make sure you have the following:
 
 - A target **mount point** directory on your local file system (e.g., `/home/user/oneclient`).
 
-> **Note:** Oneclient requires FUSE. Most Linux distributions include it by default. If you encounter permission issues, see the [Troubleshooting](#troubleshooting) section.
-
----
+<Callout type="info" title="Tip">
+  Oneclient requires FUSE. Most Linux distributions include it by default. If you encounter permission issues, see the [Troubleshooting](#troubleshooting) section.
+</Callout>
 
 ## Procedure
 
@@ -33,13 +34,27 @@ Run the official installation script in your terminal:
 $ curl -sS http://get.onedata.org/oneclient.sh | bash
 ```
 
-> **Warning:** Oneclient is **not officially supported** on Ubuntu 24 (Noble Numbat). The installation script performs a Linux version check that will block the installation. You can bypass this check by editing the script, but proceed at your own risk.
+<Callout type="warn" title="Warning">
+  Oneclient's official support is limited to several Ubuntu LTS versions:
+  - 16.04 LTS (Xenial Xerus)
+  - 18.04 LTS (Bionic Beaver)
+  - 20.04 LTS (Focal Fossa)
+  - 22.04 LTS (Jammy Jellyfish)
+  - 24.04 LTS (Noble Numbat)
+
+  The installation script performs a Linux version check and blocks the installation for unsupported systems.
+
+  You can bypass this check by editing the script or downloading resources manually from https://get.onedata.org,
+  but proceed at your own risk.
+
+  Alternatively, use the [OCI image approach](#using-oneclient-oci-image).
+</Callout>
 
 ### 2. Mount your Space
 
 Choose one of the following methods.
 
-#### Option A — Command-line flags
+#### Option A - Command-line flags
 
 Provide the provider hostname, access token, and mount point directly:
 
@@ -48,11 +63,11 @@ $ oneclient -H <PROVIDER_HOSTNAME> -t <ACCESS_TOKEN> <MOUNT_POINT>
 ```
 
 Replace the placeholders:
-- `<PROVIDER_HOSTNAME>` — your Oneprovider host (e.g., `cloud2.onedata.e-infra.cz`)
-- `<ACCESS_TOKEN>` — your access token string
-- `<MOUNT_POINT>` — the local directory where you want the Space to appear
+- `<PROVIDER_HOSTNAME>` - your Oneprovider host (e.g., `cloud2.onedata.e-infra.cz`)
+- `<ACCESS_TOKEN>` - your access token string
+- `<MOUNT_POINT>` - the local directory where you want the Space to appear
 
-#### Option B — Environment variables
+#### Option B - Environment variables
 
 Set the credentials as environment variables, then mount:
 
@@ -62,7 +77,9 @@ $ export ONECLIENT_PROVIDER_HOST=<PROVIDER_HOSTNAME>   # e.g. cloud2.onedata.e-i
 $ oneclient <MOUNT_POINT>                              # e.g. /home/honza/oneclient
 ```
 
-> **Tip:** Using environment variables is useful when you want to avoid typing long tokens repeatedly or when running batch jobs on an HPC cluster.
+<Callout type="info" title="Tip">
+  Using environment variables is useful when you want to avoid typing long tokens repeatedly or when running batch jobs on an HPC cluster.
+</Callout>
 
 ### 3. Verify the mount
 
@@ -82,21 +99,168 @@ When you are finished, terminate Oneclient and unmount the directory:
 $ fusermount -uz <MOUNT_POINT>
 ```
 
-> **Note:** If the mount point still appears busy, close any terminals or applications currently using files inside it, then retry the unmount command.
+<Callout type="info" title="Note">
+  If the mount point still appears busy, close any terminals or applications currently using files inside it, then retry the unmount command.
+</Callout>
 
----
+## Using Oneclient OCI image
+
+Onedata provides official Oneclient image, which can be used instead of installing the client in your system:
+- https://hub.docker.com/r/onedata/oneclient.
+
+See also the official documentation at https://onedata.org/docs/25/user-guide/interfaces/oneclient/#using-oneclient-from-docker.
+
+You can run the client in a container using your preferred container management tool, such as `docker` or `podman`.
+```bash
+$ docker pull onedata/oneclient:25.1
+```
+
+<Callout type="info" title="Note">
+  On Linux systems, you will most likely need to run the container with elevated privileges.
+  `docker` might require it to access the system socket, while both `docker` and `podman` need it
+  to enable Oneclient in the container to perform FUSE mount (see below).
+  ```bash
+  $ sudo docker pull onedata/oneclient:25.1
+  ```
+</Callout>
+
+### Prerequisites
+
+#### FUSE setup
+
+Since the Oneclient container is started with elevated privileges, the mountpoint will be inaccessible for regular users.
+This is fine if you try to access it inside the container. However, if you try to share the mountpoint with your host machine
+and access it as a local user, you must instruct the FUSE mount to allow other users to access it.
+
+This can be achieved by passing the `-o allow_other` argument to the `oneclient` command, which in turn passes the `allow_other`
+option to the FUSE.
+
+Two actions are required:
+- Configure FUSE to enable non-root users to use the `allow_other` option.
+- Pass the option as an argument to the `oneclient` command.
+
+See [Fix FUSE permissions guide](/docs/troubleshooting/oneclient-permissions-denied) for details.
+
+See also examples below.
+
+#### Environment variables
+
+As with the Oneclient installed in your system, the OCI image requires at least these two environment variables:
+- `ONECLIENT_ACCESS_TOKEN`
+- `ONECLIENT_PROVIDER_HOST`
+
+You may pass them to the `docker`/`podman` command:
+```bash
+$ sudo docker run ... -e ONECLIENT_ACCESS_TOKEN="..." -e ONECLIENT_PROVIDER_HOST="..." ...
+```
+However, it would be useful and more secure to not type the values directly as command arguments:
+```bash
+$ sudo docker run ... -e ONECLIENT_ACCESS_TOKEN=$(cat ./onedata-access-token.txt) -e ONECLIENT_PROVIDER_HOST=$(cat ./onedata-provider-host.txt) ...
+```
+Or use environment variable export:
+```bash
+$ export ONECLIENT_ACCESS_TOKEN=$(cat ./onedata-access-token.txt)
+$ export ONECLIENT_PROVIDER_HOST="..."
+$ sudo docker run ... -e ONECLIENT_ACCESS_TOKEN="${ONECLIENT_ACCESS_TOKEN}" -e ONECLIENT_PROVIDER_HOST="${ONECLIENT_PROVIDER_HOST}" ...
+```
+
+### Mounting spaces inside the container
+
+This is the basic use, albeit slightly less useful:
+```bash
+$ sudo docker run -d --rm --name onedata-oneclient \
+  -e ONECLIENT_ACCESS_TOKEN="${ONECLIENT_ACCESS_TOKEN}" \
+  -e ONECLIENT_PROVIDER_HOST="${ONECLIENT_PROVIDER_HOST}" \
+  --privileged \
+  onedata/oneclient:25.1
+8fc2977127c69b18e2ff987f572d7cc105d557e31574458231238acd5eae678d
+
+$ sudo docker exec -it onedata-oneclient bash
+root@8fc2977127c6:/tmp# ls /mnt/oneclient/
+...
+root@8fc2977127c6:/tmp# exit
+
+$ sudo docker stop onedata-oneclient
+onedata-oneclient
+```
+As you can see, the Onclient mounts your space to the `/mnt/oneclient` directory inside the container, where you can access it.
+
+Thanks to the `--rm` argument, the container is deleted after you stop it.
+
+The `--privileged` enables the Oneclient to perform the FUSE mount.
+
+### Mounting space outside the container
+
+This enables you to mount Onedata spaces to your local directory using the containerized client.
+The principle is the same as in previous case, the difference lies in sharing a directory from within the guest (container)
+with the host (e.g. your local machine).
+```bash
+$ sudo docker run -d --rm --name onedata-oneclient \
+  -e ONECLIENT_ACCESS_TOKEN="${ONECLIENT_ACCESS_TOKEN}" \
+  -e ONECLIENT_PROVIDER_HOST="${ONECLIENT_PROVIDER_HOST}" \
+  --privileged \
+  -v /tmp/oneclient:/mnt/oneclient:shared \
+  onedata/oneclient:25.1 -o allow_other /mnt/oneclient
+2fbf0d602e57cecd3d5319f0e207eeec8789629300aa59d692ab9161c7dc5561
+$ ls /tmp/oneclient
+...
+$ sudo docker exec onedata-oneclient pkill --signal SIGTERM oneclient
+```
+This time, the container FUSE mount at `/mnt/oneclient` is propagated to the host thanks to the
+`-v /tmp/oneclient:/mnt/oneclient:shared` argument.
+
+In order to release the mount, the `oneclient` itself must be allowed to exit gracefully. You can achieve that
+by sending it the `SIGTERM` signal inside the container, using `docker exec ...`.
+
+If you tried to just stop the container, you would end up with a stale mount.
+```bash
+$ sudo docker stop onedata-oneclient
+onedata-oneclient
+$ mount | grep oneclient
+oneclient on /tmp/oneclient type fuse.oneclient (rw,nosuid,nodev,relatime,user_id=0,group_id=0,allow_other)
+$ ls /tmp/oneclient
+ls: cannot access '/tmp/oneclient': Transport endpoint is not connected
+```
+To resolve this, perform an explicit unmount:
+```bash
+$ sudo fusermount -u /tmp/oneclient
+$ mount | grep oneclient
+$ ls /tmp/oneclient
+```
+If the manual unmount fails on busy resource, either identify the offending processes and terminate them,
+or if you know what you are doing, force-kill them:
+```bash
+$ sudo fusermount -u /tmp/oneclient
+fusermount: failed to unmount /home/jsmrcka/work/tmp/oneclient: Device or resource busy
+$ fuser -km /tmp/oneclient
+/tmp/oneclient: 907694c
+$ sudo fusermount -u /tmp/oneclient
+$ mount | grep oneclient
+```
+
+#### Specifics of using `podman`
+
+When using `podman` instead of `docker`, you will need to specify the container's network:
+```bash
+$ sudo docker run -d --rm --name onedata-oneclient \
+  -e ONECLIENT_ACCESS_TOKEN="${ONECLIENT_ACCESS_TOKEN}" \
+  -e ONECLIENT_PROVIDER_HOST="${ONECLIENT_PROVIDER_HOST}" \
+  --privileged \
+  --network host \
+  -v /tmp/oneclient:/mnt/oneclient:shared \
+  onedata/oneclient:25.1 -o allow_other /mnt/oneclient
+```
+The `--network host` argument bypasses the `podman`'s network isolation and enables the Oneclient to properly resolve DNS names and perform FUSE mounts.
 
 ## Troubleshooting
 
 | Symptom | Likely cause | Solution |
 |---|---|---|
 | `Permission denied` after mounting, `d?????????` on the mount point | FUSE user permissions not allowed | [Fix FUSE permissions](/docs/troubleshooting/oneclient-permissions-denied) |
-| Installation script fails on Ubuntu 24 | Unsupported OS version check | Edit the script to bypass the version check, or use an older Ubuntu version |
+| Installation script fails | Unsupported OS version check | Edit the script to bypass the version check, or use an older Ubuntu version |
 | Mount command hangs or times out | Invalid provider hostname or network issue | Verify the hostname in the Web UI and check your network connectivity |
-
----
 
 ## See also
 
-- [Use Onedata via the Web Portal](/docs/how-to/how-to-use-portal) — an alternative when you do not need a local mount.
+- [Use Onedata via the Web Portal](/docs/how-to/how-to-use-portal) - an alternative when you do not need a local mount.
 - [Troubleshooting: Oneclient permissions denied](/docs/troubleshooting/oneclient-permissions-denied)
